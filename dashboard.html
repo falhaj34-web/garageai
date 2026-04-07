@@ -5,9 +5,28 @@
 <title>Dashboard</title>
 
 <style>
-body {background:#0b1220;color:white;text-align:center;font-family:Arial}
-.card {background:#111a2e;margin:20px;padding:20px;border-radius:16px}
-button {background:linear-gradient(90deg,#4facfe,#43e97b);border:none;padding:15px;color:white;border-radius:12px;width:100%}
+body {
+  background: #0b1220;
+  color: white;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+.card {
+  background: #111a2e;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 16px;
+}
+button {
+  background: linear-gradient(90deg, #4facfe, #43e97b);
+  border: none;
+  padding: 15px;
+  color: white;
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -16,24 +35,24 @@ button {background:linear-gradient(90deg,#4facfe,#43e97b);border:none;padding:15
 <h1>Dashboard</h1>
 
 <div class="card">
-<p id="user"></p>
-<button onclick="logout()">Logout</button>
+  <p id="user"></p>
+  <button onclick="logout()">Logout</button>
 </div>
 
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const supabase = createClient(
-"https://daudhkyacwdjcsrssrxr.supabase.co",
-"sb_publishable_Q-xzHaJkP2a-uOoVSHr9WQ_wKbAX_tv"
+  "https://daudhkyacwdjcsrssrxr.supabase.co",
+  "sb_publishable_Q-xzHaJkP2a-uOoVSHr9WQ_wKbAX_tv"
 )
 
 const userText = document.getElementById("user")
 
-async function checkUser(){
+async function checkUser() {
   const { data } = await supabase.auth.getUser()
 
-  if(!data.user){
+  if (!data.user) {
     window.location.href = "index.html"
   } else {
     userText.innerText = data.user.email
