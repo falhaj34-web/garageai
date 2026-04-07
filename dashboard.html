@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+body {background:#0b1220;color:white;text-align:center;font-family:Arial}
+.card {background:#111a2e;margin:20px;padding:20px;border-radius:16px}
+button {background:linear-gradient(90deg,#4facfe,#43e97b);border:none;padding:15px;color:white;border-radius:12px;width:100%}
+</style>
+</head>
+
+<body>
+
+<h1>Dashboard</h1>
+
+<div class="card">
+<p id="user"></p>
+<button onclick="logout()">Logout</button>
+</div>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+const supabase = createClient(
+"https://daudhkyacwdjcsrssrxr.supabase.co",
+"sb_publishable_Q-xzHaJkP2a-uOoVSHr9WQ_wKbAX_tv"
+)
+
+const userText = document.getElementById("user")
+
+async function checkUser(){
+  const { data } = await supabase.auth.getUser()
+
+  if(!data.user){
+    window.location.href = "index.html"
+  } else {
+    userText.innerText = data.user.email
+  }
+}
+
+window.logout = async () => {
+  await supabase.auth.signOut()
+  window.location.href = "index.html"
+}
+
+checkUser()
+</script>
+
+</body>
+</html>
