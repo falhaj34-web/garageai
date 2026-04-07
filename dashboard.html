@@ -2,41 +2,123 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
+<title>GarageAI Pro Dashboard</title>
 
 <style>
-body {
-  background: #0b1220;
-  color: white;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  margin: 0;
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0b1220;
+  color:white;
+  text-align:center;
 }
-.card {
-  background: #111a2e;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 16px;
+h1{
+  margin-top:30px;
 }
-button {
-  background: linear-gradient(90deg, #4facfe, #43e97b);
-  border: none;
-  padding: 15px;
-  color: white;
-  border-radius: 12px;
-  width: 100%;
-  cursor: pointer;
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+  padding:20px;
+  max-width:900px;
+  margin:auto;
+}
+.card{
+  background:#111a2e;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+button{
+  background:linear-gradient(90deg,#4facfe,#43e97b);
+  border:none;
+  padding:15px;
+  color:white;
+  border-radius:12px;
+  width:100%;
+  margin-top:10px;
+  cursor:pointer;
+  font-size:16px;
+}
+.small{
+  opacity:0.75;
+  font-size:14px;
+}
+input{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
+  border:none;
+  box-sizing:border-box;
+}
+@media(min-width:768px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+  .full{
+    grid-column:1 / -1;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Dashboard</h1>
+<h1>GarageAI Pro Dashboard</h1>
 
-<div class="card">
-  <p id="user"></p>
-  <button onclick="logout()">Logout</button>
+<div class="grid">
+
+  <div class="card full">
+    <h2>Member Account</h2>
+    <p id="user"></p>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div class="card">
+    <h2>Scanner</h2>
+    <p>OBD2 Scanner</p>
+    <p class="small">Status: not connected yet</p>
+    <button>Connect Scanner</button>
+  </div>
+
+  <div class="card">
+    <h2>Membership</h2>
+    <p>$49.99 / month</p>
+    <p class="small">Billing integration comes after Lemon Squeezy approval</p>
+    <button>Manage Membership</button>
+  </div>
+
+  <div class="card">
+    <h2>Scan a Code</h2>
+    <input placeholder="Enter DTC code like P0171">
+    <button>Analyze Code</button>
+  </div>
+
+  <div class="card">
+    <h2>Live Data</h2>
+    <p class="small">Fuel trims, O2 data, RPM, temperature, and more will appear here after scanner integration.</p>
+    <button>View Live Data</button>
+  </div>
+
+  <div class="card">
+    <h2>Repair Guidance</h2>
+    <p class="small">Get step-by-step help for diagnostics and repairs.</p>
+    <button>Open Repair Assistant</button>
+  </div>
+
+  <div class="card">
+    <h2>Tuning Help</h2>
+    <p class="small">Upload logs and get tuning guidance for airflow, fueling, timing, and drivability.</p>
+    <button>Open Tuning Assistant</button>
+  </div>
+
+  <div class="card full">
+    <h2>Saved Vehicle</h2>
+    <p class="small">No vehicle saved yet</p>
+    <button>Add Vehicle</button>
+  </div>
+
 </div>
 
 <script type="module">
