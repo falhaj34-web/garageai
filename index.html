@@ -5,10 +5,37 @@
 <title>GarageAI Pro</title>
 
 <style>
-body {margin:0;font-family:Arial;background:#0b1220;color:white;text-align:center}
-.card {background:#111a2e;margin:20px;padding:20px;border-radius:16px}
-button {background:linear-gradient(90deg,#4facfe,#43e97b);border:none;padding:15px;color:white;border-radius:12px;width:100%}
-input {width:100%;padding:12px;margin:10px 0;border-radius:10px;border:none}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1220;
+  color: white;
+  text-align: center;
+}
+.card {
+  background: #111a2e;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 16px;
+}
+button {
+  background: linear-gradient(90deg, #4facfe, #43e97b);
+  border: none;
+  padding: 15px;
+  color: white;
+  border-radius: 12px;
+  width: 100%;
+  margin-top: 10px;
+  cursor: pointer;
+}
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+}
 </style>
 
 </head>
@@ -18,48 +45,48 @@ input {width:100%;padding:12px;margin:10px 0;border-radius:10px;border:none}
 <p>AI-powered automotive diagnostics platform</p>
 
 <div class="card">
-<h2>Membership</h2>
-<h1>$49.99</h1>
-<p>per month</p>
-<p>✔ AI diagnostics</p>
-<p>✔ DTC scan help</p>
-<p>✔ Repair guidance</p>
-<button>Start Membership</button>
+  <h2>Membership</h2>
+  <h1>$49.99</h1>
+  <p>per month</p>
+  <p>✔ AI diagnostics</p>
+  <p>✔ DTC scan help</p>
+  <p>✔ Repair guidance</p>
+  <button>Start Membership</button>
 </div>
 
 <div class="card">
-<h2>OBD2 Scanner</h2>
-<h1>$99</h1>
-<p>one-time</p>
-<button>Buy Scanner</button>
+  <h2>OBD2 Scanner</h2>
+  <h1>$99</h1>
+  <p>one-time</p>
+  <button>Buy Scanner</button>
 </div>
 
 <div class="card">
-<h2>Login</h2>
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-<button onclick="signup()">Sign Up</button>
-<p id="status"></p>
+  <h2>Login</h2>
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <button onclick="signup()">Sign Up</button>
+  <p id="status"></p>
 </div>
 
 <div class="card" id="dashboard" style="display:none;">
-<h2>Dashboard</h2>
-<p id="user"></p>
-<button onclick="logout()">Logout</button>
+  <h2>Dashboard</h2>
+  <p id="user"></p>
+  <button onclick="logout()">Logout</button>
 </div>
 
-<div style="font-size:12px;opacity:0.7;padding:20px">
-<h3>Terms</h3>
-<p>GarageAI Pro provides informational diagnostics only. No refunds. Not responsible for damages.</p>
+<div style="font-size:12px; opacity:0.7; padding:20px">
+  <h3>Terms</h3>
+  <p>GarageAI Pro provides informational diagnostics only. No refunds. Not responsible for damages.</p>
 </div>
 
 <script type="module">
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const supabase = createClient(
-"https://daudhkyacwdjcsrssrxr.supabase.co",
-"sb_publishable_Q-xzHaJkP2a-uOoVSHr9WQ_wKbAX_tv"
+  "https://daudhkyacwdjcsrssrxr.supabase.co",
+  "sb_publishable_Q-xzHaJkP2a-uOoVSHr9WQ_wKbAX_tv"
 )
 
 const status = document.getElementById("status")
@@ -67,12 +94,12 @@ const dashboard = document.getElementById("dashboard")
 const userText = document.getElementById("user")
 
 function setLoggedIn(user){
-  dashboard.style.display="block"
-  userText.innerText=user.email
+  dashboard.style.display = "block"
+  userText.innerText = user.email
 }
 
 function setLoggedOut(){
-  dashboard.style.display="none"
+  dashboard.style.display = "none"
 }
 
 window.signup = async () => {
@@ -88,12 +115,12 @@ window.login = async () => {
   const email = document.getElementById("email").value
   const password = document.getElementById("password").value
 
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+  const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-  if(error){
+  if (error) {
     status.innerText = error.message
   } else {
-    setLoggedIn(data.user)
+    window.location.href = "dashboard.html"
   }
 }
 
